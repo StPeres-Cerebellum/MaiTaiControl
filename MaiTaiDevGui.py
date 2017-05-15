@@ -244,7 +244,10 @@ class MaiTaiDevGui(QtGui.QMainWindow,maiTaiControlTemplate.Ui_MainWindow):
         self.listenToSocket = True
         print 'before connect'
         self.dev.socket_connect()
-        #self.ui.socketConnectionLabel.setText('active with '+self.dev.remoteAddr)
+        try:
+            self.ui.socketConnectionLabel.setText('active with '+self.dev.remoteAddr)
+        except:
+            pass
         while self.listenToSocket:
             do_read = False
             try:
@@ -272,7 +275,10 @@ class MaiTaiDevGui(QtGui.QMainWindow,maiTaiControlTemplate.Ui_MainWindow):
                     print 'socket connection closed due to error'
                     self.activateSocket()
                     break
-        #self.ui.socketConnectionLabel.setText('inactive')
+        try:
+            self.ui.socketConnectionLabel.setText('inactive')
+        except:
+            pass
         print 'after thread'
         self.dev.socket_close_connection()  
    
@@ -299,7 +305,7 @@ class MaiTaiDevGui(QtGui.QMainWindow,maiTaiControlTemplate.Ui_MainWindow):
             return (1,self.dev.isLaserOn())
         elif data[0] == 'getRelativeHumidity':
             return (1,self.dev.humidity())
-        elif data[0] === 'getPower':
+        elif data[0] == 'getPower':
             return (1,self.dev.outputPower())
         elif data[0] == 'getWavelength':
             return (1,self.dev.getWavelength())
@@ -308,11 +314,11 @@ class MaiTaiDevGui(QtGui.QMainWindow,maiTaiControlTemplate.Ui_MainWindow):
             return (1,self.dev.getWavelength())
         elif data[0] == 'getWavelengthRange':
             return (1,self.dev.getWavelengthRange())
-        elif data[0] === 'getPumpPower':
+        elif data[0] == 'getPumpPower':
             return (1,self.dev.getPumpPower())
-        elif data[0] === 'getShutter':
+        elif data[0] == 'getShutter':
             return (1,self.dev.getInternalShutter())
-        elif data[0] === 'setShutter':
+        elif data[0] == 'setShutter':
             if data[1]:
                 self.ui.InternalShutterBtn.setChecked(True)
             else :
