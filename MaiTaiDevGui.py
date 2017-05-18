@@ -49,7 +49,6 @@ class MaiTaiDevGui(QtGui.QMainWindow,maiTaiControlTemplate.Ui_MainWindow):
         #self.ui.turnOnOffBtn.hide()
         
         self.wlBounds = self.dev.getWavelengthRange()
-        print self.wlBounds
         startWL = self.dev.getWavelength()
         self.ui.wavelengthSpin_2.setOpts(suffix='m', siPrefix=True, dec=False, step=5e-9)
         self.ui.wavelengthSpin_2.setValue(startWL)
@@ -246,8 +245,9 @@ class MaiTaiDevGui(QtGui.QMainWindow,maiTaiControlTemplate.Ui_MainWindow):
         self.listenToSocket = True
         print 'before connect'
         self.dev.socket_connect()
+        print 'active with '+self.dev.remoteAddr[0]
         try:
-            self.ui.socketConnectionLabel.setText('active with '+self.dev.remoteAddr)
+            self.ui.socketConnectionLabel.setText('active with '+str(self.dev.remoteAddr[0]))
         except:
             pass
         while self.listenToSocket:
@@ -257,7 +257,7 @@ class MaiTaiDevGui(QtGui.QMainWindow,maiTaiControlTemplate.Ui_MainWindow):
                 #self.c,addr = self.s.accept() #Establish a connection with the client
                 #print 'select select'
                 do_read = self.dev.socket_monitor_activity()
-            except socket.error:
+            except:
                 pass
             if do_read:
                 try:
@@ -273,7 +273,7 @@ class MaiTaiDevGui(QtGui.QMainWindow,maiTaiControlTemplate.Ui_MainWindow):
                         print "Got data: ", data
                     res = self.performRemoteInstructions(data)
                     self.dev.socket_send_data(str(res)+'...'+data)
-                except socket.error:
+                except :
                     print 'socket connection closed due to error'
                     self.activateSocket()
                     break
@@ -313,24 +313,29 @@ class MaiTaiDevGui(QtGui.QMainWindow,maiTaiControlTemplate.Ui_MainWindow):
         elif data[0] == 'getWavelength':
             return (1,self.dev.getWavelength())
         elif data[0] == 'setWavelength':
-            self.ui.wavelengthSpin_2.setValue(data[1])
+            self.ui.wavelengthSpin_2.setValue(float(data[1]))
             return (1,self.dev.getWavelength())
         elif data[0] == 'getWavelengthRange':
             return (1,self.dev.getWavelengthRange())
         elif data[0] == 'getPumpPower':
             return (1,self.dev.getPumpPower())
         elif data[0] == 'getShutter':
+            #print self.dev.getInternalShutter(), dtype(self.dev.getInternalShutter())
             return (1,self.dev.getInternalShutter())
         elif data[0] == 'setShutter':
-            if data[1]:
+            if data[1] == 'True' or data[1] == ' True':
                 self.ui.InternalShutterBtn.setChecked(True)
-            else :
+            elif data[1] == 'False' or data[1] == ' False':
                 self.ui.InternalShutterBtn.setChecked(False)
         elif data[0] == 'checkPulsing':
             return (1,self.dev.pulsing())
+        elif data[0] == 'getStatus':
+            return (1,self.dev.maiTaiHistory)
+        elif data[0] == 'getStatusPumpLaser':
+            return (1,self.dev.maiTaiPumpLaserHistory)
         else:
             return 0
-    
+        
     def closeEvent(self, event):
         print 'stopping threads'
         self.listenToSocket = False
