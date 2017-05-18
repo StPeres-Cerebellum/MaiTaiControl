@@ -6,7 +6,7 @@
 #
 # WARNING! All changes made in this file will be lost!
 
-from PyQt5 import QtCore, QtGui
+from PyQt4 import QtCore, QtGui
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -198,9 +198,9 @@ class Ui_MainWindow(object):
         self.label = QtGui.QLabel(self.gridGroupBox1)
         self.label.setObjectName(_fromUtf8("label"))
         self.gridLayout_2.addWidget(self.label, 1, 0, 1, 1)
-        self.label_2 = QtGui.QLabel(self.gridGroupBox1)
-        self.label_2.setObjectName(_fromUtf8("label_2"))
-        self.gridLayout_2.addWidget(self.label_2, 1, 1, 1, 1)
+        self.socketConnectionLabel = QtGui.QLabel(self.gridGroupBox1)
+        self.socketConnectionLabel.setObjectName(_fromUtf8("socketConnectionLabel"))
+        self.gridLayout_2.addWidget(self.socketConnectionLabel, 1, 1, 1, 1)
         self.listenToSocketBtn = QtGui.QPushButton(self.gridGroupBox1)
         self.listenToSocketBtn.setCheckable(True)
         self.listenToSocketBtn.setObjectName(_fromUtf8("listenToSocketBtn"))
@@ -236,7 +236,7 @@ class Ui_MainWindow(object):
         self.label_4.setText(_translate("MainWindow", "Current Output Power:", None))
         self.label_8.setText(_translate("MainWindow", "Power at sample (calc.):", None))
         self.label.setText(_translate("MainWindow", "Socket connection:", None))
-        self.label_2.setText(_translate("MainWindow", "inactive", None))
+        self.socketConnectionLabel.setText(_translate("MainWindow", "inactive", None))
         self.listenToSocketBtn.setText(_translate("MainWindow", "Listen to Socket", None))
 
 from pyqtgraph import SpinBox
