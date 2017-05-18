@@ -1,4 +1,4 @@
-from PyQt4 import QtGui, QtCore
+from PyQt5 import QtGui, QtCore
 #from acq4.Manager import getManager, logExc, logMsg
 #from acq4.devices.Laser.devTemplate import Ui_Form
 #from acq4.devices.Laser.LaserDevGui import LaserDevGui
@@ -48,10 +48,12 @@ class MaiTaiDevGui(QtGui.QMainWindow,maiTaiControlTemplate.Ui_MainWindow):
         #self.ui.MaiTaiGroup.hide()
         #self.ui.turnOnOffBtn.hide()
         
+        self.wlBounds = self.dev.getWavelengthRange()
+        print self.wlBounds
         startWL = self.dev.getWavelength()
         self.ui.wavelengthSpin_2.setOpts(suffix='m', siPrefix=True, dec=False, step=5e-9)
         self.ui.wavelengthSpin_2.setValue(startWL)
-        self.ui.wavelengthSpin_2.setOpts(bounds=self.dev.getWavelengthRange())
+        self.ui.wavelengthSpin_2.setOpts(bounds=self.wlBounds)
         self.ui.currentWaveLengthLabel.setText(siFormat(startWL, suffix='m'))
         
         self.socketListenThread = Thread(target=self.socketListening) # listenThread
@@ -295,6 +297,7 @@ class MaiTaiDevGui(QtGui.QMainWindow,maiTaiControlTemplate.Ui_MainWindow):
     def performRemoteInstructions(self,rawData):
         data = rawData.split(',')
         #
+        print data
         if data[0] == 'switchLaserOn':
             self.ui.turnOnOffBtn.setChecked(True)
             return (1,self.dev.isLaserOn())

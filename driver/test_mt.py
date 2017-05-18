@@ -5,6 +5,7 @@ import maitai
 
 fw = maitai.MaiTai(2)
 print fw.getWavelength()
+print fw.isLaserOn()
 print fw.getWavelengthRange()
 fw.close()
 #cam = pco.getCamera('pixelfly')

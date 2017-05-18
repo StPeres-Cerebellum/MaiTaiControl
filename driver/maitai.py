@@ -89,7 +89,7 @@ class MaiTai(SerialDevice):
     Class for communicating with Spectra-Physics Mai Tai laser via serial port.
     
     """
-    def __init__(self, port, baud=9600):
+    def __init__(self, port, baud=38400): #9600):
         """
         port: serial COM port (0 => com1)"""
 
@@ -115,14 +115,13 @@ class MaiTai(SerialDevice):
         (minWaveLength,maxWaveLength) = self.getWavelengthRange()
         if (wl < minWaveLength) or (wl > maxWaveLength):
             raise Exception("Specified wavelength of %s nm is outside the supported range by the Mai Tai : %s < wavelength < %s" % (wl,minWaveLength,maxWaveLength)  )
-        
-        self['WAVelength'] = int(wl)
-        
-        if block:
-            while True:
-                if self.getWavelength() == wl:
-                    break
-                time.sleep(0.1)
+        else:
+            self['WAVelength'] = int(wl)
+            if block:
+                while True:
+                    if self.getWavelength() == wl:
+                        break
+                    time.sleep(0.1)
 
     def getWavelengthRange(self):
         minWl = self['WAVelength:MIN?']

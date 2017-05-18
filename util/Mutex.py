@@ -5,7 +5,7 @@ Copyright 2010  Luke Campagnola
 Distributed under MIT/X11 license. See license.txt for more infomation.
 """
 
-from PyQt4 import QtCore
+from PyQt5 import QtCore
 import traceback
 import pyqtgraph as pg
 from pyqtgraph.util.mutex import Mutex, RecursiveMutex

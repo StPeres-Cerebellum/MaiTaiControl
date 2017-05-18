@@ -6,7 +6,7 @@ from util.Mutex import Mutex
 from util.Thread import Thread
 import util.debug as debug
 import time
-from PyQt4 import QtCore, QtGui
+from PyQt5 import QtCore, QtGui
 import sys
 import socket
 import select
@@ -29,20 +29,20 @@ class MaiTaiLaser(QtCore.QObject):
         super(MaiTaiLaser,self).__init__()
 
         self.port = 2 #config['port']-1  ## windows com ports start at COM1, pyserial ports start at 0
-        self.baud = 9600 # config.get('baud', 9600)
+        self.baud = 38400 #9600 # config.get('baud', 9600)
         self.alignmentPower = 0.2 # config.get('alignmentPower',0.2)
         
         self.dataSize = 1024 # size of data-packages sent back and forth
         
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM) #Create a socket object
-        self.host = '172.20.61.88' #params.host #socket.gethostname() #Get the local machine name
+        self.host = '172.20.61.234' #172.20.61.88' #params.host #socket.gethostname() #Get the local machine name
         self.socketPort = 6666 # params.port # Reserve a port for your service
         self.sock.bind((self.host,self.socketPort)) #Bind to the port
         #self.sock.settimeout(10)
         
         
         
-        self.driver = MaiTai(self.port, self.baud)
+        self.driver = MaiTai(self.port)
         self.driverLock = Mutex(QtCore.QMutex.Recursive)  ## access to low level driver calls
         
         self.maiTaiLock = Mutex(QtCore.QMutex.Recursive)  ## access to self.attributes
