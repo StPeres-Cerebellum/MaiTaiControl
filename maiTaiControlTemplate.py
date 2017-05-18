@@ -6,7 +6,7 @@
 #
 # WARNING! All changes made in this file will be lost!
 
-from PyQt5 import QtCore, QtGui
+from PyQt4 import QtCore, QtGui
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -199,6 +199,10 @@ class Ui_MainWindow(object):
         self.label.setObjectName(_fromUtf8("label"))
         self.gridLayout_2.addWidget(self.label, 1, 0, 1, 1)
         self.socketConnectionLabel = QtGui.QLabel(self.gridGroupBox1)
+        font = QtGui.QFont()
+        font.setBold(True)
+        font.setWeight(75)
+        self.socketConnectionLabel.setFont(font)
         self.socketConnectionLabel.setObjectName(_fromUtf8("socketConnectionLabel"))
         self.gridLayout_2.addWidget(self.socketConnectionLabel, 1, 1, 1, 1)
         self.listenToSocketBtn = QtGui.QPushButton(self.gridGroupBox1)

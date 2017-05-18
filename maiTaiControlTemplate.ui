@@ -348,6 +348,12 @@
           </item>
           <item row="1" column="1">
            <widget class="QLabel" name="socketConnectionLabel">
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
             <property name="text">
              <string>inactive</string>
             </property>
