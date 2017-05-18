@@ -270,7 +270,7 @@ class MaiTaiDevGui(QtGui.QMainWindow,maiTaiControlTemplate.Ui_MainWindow):
                         self.activateSocket() # then re-initiate listening
                         break
                     if not 'getPos' in data:
-                        print "Got data: ", data
+                        print "Got socket data: ", data
                     res = self.performRemoteInstructions(data)
                     self.dev.socket_send_data(str(res)+'...'+data)
                 except :
@@ -297,7 +297,6 @@ class MaiTaiDevGui(QtGui.QMainWindow,maiTaiControlTemplate.Ui_MainWindow):
     def performRemoteInstructions(self,rawData):
         data = rawData.split(',')
         #
-        print data
         if data[0] == 'switchLaserOn':
             self.ui.turnOnOffBtn.setChecked(True)
             return (1,self.dev.isLaserOn())
