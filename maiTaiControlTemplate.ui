@@ -267,6 +267,9 @@
          <property name="text">
           <string>Turn Laser On</string>
          </property>
+         <property name="shortcut">
+          <string>Ctrl+L</string>
+         </property>
          <property name="checkable">
           <bool>true</bool>
          </property>
@@ -366,6 +369,9 @@
            <widget class="QPushButton" name="listenToSocketBtn">
             <property name="text">
              <string>Listen to Socket</string>
+            </property>
+            <property name="shortcut">
+             <string>Space</string>
             </property>
             <property name="checkable">
              <bool>true</bool>

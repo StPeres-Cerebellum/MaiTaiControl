@@ -239,11 +239,13 @@ class Ui_MainWindow(object):
         self.label_39.setText(_translate("MainWindow", "Current Wavelength:", None))
         self.alignmentModeBtn.setText(_translate("MainWindow", "Alignment mode Off", None))
         self.turnOnOffBtn.setText(_translate("MainWindow", "Turn Laser On", None))
+        self.turnOnOffBtn.setShortcut(_translate("MainWindow", "Ctrl+L", None))
         self.InternalShutterBtn.setText(_translate("MainWindow", "Open Laser Shutter", None))
         self.label_4.setText(_translate("MainWindow", "Current Output Power:", None))
         self.label_8.setText(_translate("MainWindow", "Power at sample (calc.):", None))
         self.label.setText(_translate("MainWindow", "Socket connection:", None))
         self.socketConnectionLabel.setText(_translate("MainWindow", "inactive", None))
         self.listenToSocketBtn.setText(_translate("MainWindow", "Listen to Socket", None))
+        self.listenToSocketBtn.setShortcut(_translate("MainWindow", "Space", None))
 
 from pyqtgraph import SpinBox
